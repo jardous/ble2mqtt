@@ -1,0 +1,18 @@
+[Unit]
+Description=Scan AdafruitSensorMeasurement BLE advertisements and log them to MQTT
+After=network.target
+Wants=bluetooth.target
+
+[Service]
+Type = simple
+WorkingDirectory=/home/pi/ada
+ExecStart=python ble_broadcastnet_blinka_bridge.py
+User=pi
+Group=pi
+Restart=on-failure
+SyslogIdentifier=ble2mqtt
+RestartSec=5
+TimeoutStartSec=infinity
+
+[Install]
+WantedBy=multi-user.target
